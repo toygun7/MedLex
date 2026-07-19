@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedLex</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>🩺 MedLex</h1>
+<input
+    type="text"
+    id="search"
+    placeholder="Kelime ara..."
+    onkeyup="searchWord()"
+>
+<label for="category">Kategori:</label>
+
+<select id="category" onchange="filterCategory()">
+    <option value="all">Tümü</option>
+    <option value="verbs">Tıbbi Fiiller</option>
+    <option value="anatomy">Anatomi</option>
+    <option value="diseases">Hastalıklar</option>
+    <option value="general">Genel Tıp</option>
+</select>
+<div class="card">
+
+<h2 id="english">Diagnose</h2>
+
+<p><b>Türkçesi:</b></p>
+<p id="turkish">Teşhis koymak</p>
+
+<p><b>Örnek:</b></p>
+<p id="example">The doctor diagnosed pneumonia.</p>
+
+</div>
+
+<div>
+
+    <button onclick="previousWord()">⬅ Önceki</button>
+
+    <button onclick="flipCard()">🔄 Çevir</button>
+
+    <button onclick="randomWord()">🎲 Rastgele</button>
+
+    <button onclick="nextWord()">Sonraki ➜</button>
+
+    <button onclick="addFavorite()">⭐ Favorilere Ekle</button>
+
+    <h3>⭐ Favori Sayısı: <span id="favoriteCount">0</span></h3>
+
+    <h3>📚 Toplam Kelime: <span id="wordCount">0</span></h3>
+
+</div>
+<script src="anatomy.js"></script>
+<script src="diseases.js"></script>
+<script src="verbs.js"></script>
+<script src="general.js"></script>
+<script src="words.js"></script>
+<script src="script.js"></script>
+
+
+</body>
+</html>
