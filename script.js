@@ -94,7 +94,7 @@ let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
 function addFavorite(){
 
-    const word = words[current];
+    const word = filteredWords[current];
 
     const index = favorites.findIndex(function(item){
 
