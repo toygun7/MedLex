@@ -4,57 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedLex Quiz</title>
+    <title>🧠 MedLex Quiz</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>🧠 MedLex Quiz</h1>
-<label>Kategori:</label>
+    <h1>🧠 MedLex Quiz</h1>
 
-<select id="quizCategory" onchange="showCategoryCount()">
+    <div class="category-box">
 
-    <option value="all">Tümü</option>
-    <option value="anatomy">Anatomi</option>
-    <option value="diseases">Hastalıklar</option>
-    <option value="verbs">Tıbbi Fiiller</option>
-    <option value="general">Genel Tıp</option>
+        <label for="quizCategory">📂 Kategori</label>
 
-</select>
+        <select id="quizCategory" onchange="showCategoryCount()">
 
-<p id="categoryCount"></p>
+            <option value="all">📚 Tümü</option>
+            <option value="favorites">⭐ Favoriler</option>
+            <option value="general">🩺 Genel Tıp</option>
+            <option value="anatomy">🦴 Anatomi</option>
+            <option value="diseases">🦠 Hastalıklar</option>
+            <option value="verbs">💉 Tıbbi Fiiller</option>
 
-<br><br>
+        </select>
 
-<button onclick="startQuiz()">Quiz Başlat</button>
+    </div>
 
-<button onclick="changeMode()">🔄 Mod Değiştir</button>
+    <div class="info-box">
 
-<div class="card">
+        <p id="categoryCount"></p>
 
-<h2 id="question">Soru burada</h2>
+    </div>
 
-<button id="option1" onclick="checkAnswer(this)">Seçenek 1</button>
+    <div class="button-group">
 
-<button id="option2" onclick="checkAnswer(this)">Seçenek 2</button>
+        <button onclick="startQuiz()">▶ Quiz Başlat</button>
 
-<button id="option3" onclick="checkAnswer(this)">Seçenek 3</button>
+        <button onclick="changeMode()">🔄 Mod Değiştir</button>
 
-<button id="option4" onclick="checkAnswer(this)">Seçenek 4</button>
+    </div>
 
-<h3 id="score">Puan: 0</h3>
+    <div class="card">
 
-</div>
+        <h2 id="question">Soru burada</h2>
 
+        <button id="option1" onclick="checkAnswer(this)">Seçenek 1</button>
 
-<script src="anatomy.js"></script>
-<script src="diseases.js"></script>
-<script src="verbs.js"></script>
-<script src="general.js"></script>
-<script src="words.js"></script>
-<script src="quiz.js"></script>
+        <button id="option2" onclick="checkAnswer(this)">Seçenek 2</button>
+
+        <button id="option3" onclick="checkAnswer(this)">Seçenek 3</button>
+
+        <button id="option4" onclick="checkAnswer(this)">Seçenek 4</button>
+
+        <h3 id="score">🏆 Puan: 0</h3>
+
+    </div>
+
+    <script src="anatomy.js"></script>
+    <script src="diseases.js"></script>
+    <script src="verbs.js"></script>
+    <script src="general.js"></script>
+    <script src="words.js"></script>
+    <script src="quiz.js"></script>
 
 </body>
 

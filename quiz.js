@@ -14,6 +14,10 @@ if(category === "all"){
 
     quizWords = [...words];
 
+}else if(category === "favorites"){
+
+    quizWords = JSON.parse(localStorage.getItem("favorites")) || [];
+
 }else{
 
     quizWords = words.filter(function(word){
@@ -21,6 +25,19 @@ if(category === "all"){
         return word.category === category;
 
     });
+
+}
+if(quizWords.length === 0){
+
+    document.getElementById("question").innerText =
+    "⭐ Bu kategoride kelime yok.";
+
+    document.getElementById("option1").innerText = "-";
+    document.getElementById("option2").innerText = "-";
+    document.getElementById("option3").innerText = "-";
+    document.getElementById("option4").innerText = "-";
+
+    return;
 
 }
 
@@ -134,10 +151,16 @@ function showCategoryCount(){
 
     let count;
 
-
     if(category === "all"){
 
         count = words.length;
+
+    }else if(category === "favorites"){
+
+        const favorites =
+        JSON.parse(localStorage.getItem("favorites")) || [];
+
+        count = favorites.length;
 
     }else{
 
@@ -149,11 +172,11 @@ function showCategoryCount(){
 
     }
 
-
     document.getElementById("categoryCount").innerText =
     "Bu kategoride " + count + " kelime var.";
 
 }
+
 
 
 startQuiz();

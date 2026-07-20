@@ -2,6 +2,7 @@
 let current = 0;
 let filteredWords = [...words];
 let flipped = false;
+let selectedCategory = "all";
 
 function nextWord() {
 
@@ -116,7 +117,7 @@ function addFavorite(){
 
         document.getElementById("favoriteCount").innerText = favorites.length;
 
-        alert(word.english + " favorilerden çıkarıldı.");
+        showToast("❤️ " + word.english + " favorilerden çıkarıldı.","error");
         updateFavoriteButton();
 
     }else{
@@ -127,7 +128,7 @@ function addFavorite(){
 
         document.getElementById("favoriteCount").innerText = favorites.length;
 
-        alert(word.english + " favorilere eklendi.");
+        showToast("⭐ " + word.english + " favorilere eklendi.","success");
         updateFavoriteButton();
 
     }
@@ -136,8 +137,8 @@ function addFavorite(){
 
 function filterCategory(){
 
-    const category = document.getElementById("category").value;
-
+    const category = selectedCategory;
+    
     if(category === "all"){
 
         filteredWords = [...words];
@@ -186,6 +187,57 @@ function updateFavoriteButton(){
 
         button.classList.remove("favorite-active");
         button.classList.add("favorite-inactive");
+
+    }
+
+}
+function showToast(message,type="info"){
+
+    const toast = document.getElementById("toast");
+
+    toast.innerText = message;
+
+    toast.classList.remove("success","error","info");
+
+    toast.classList.add(type);
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },2000);
+
+}
+function toggleDropdown(){
+
+    document
+        .getElementById("dropdownMenu")
+        .classList.toggle("show");
+
+}
+function selectCategory(value,text){
+
+    selectedCategory = value;
+
+    document.getElementById("dropdownButton").innerHTML =
+    text + " ▼";
+
+    document
+        .getElementById("dropdownMenu")
+        .classList.remove("show");
+
+    filterCategory();
+
+}
+window.onclick = function(event){
+
+    if(!event.target.closest(".dropdown")){
+
+        document
+            .getElementById("dropdownMenu")
+            .classList.remove("show");
 
     }
 

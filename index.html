@@ -18,36 +18,68 @@
 >
 <div class="category-box">
 
-    <label for="category">📂 Kategori</label>
+    <label>📂 Kategori</label>
 
-    <select id="category" onchange="filterCategory()">
+    <div class="dropdown">
 
-        <option value="all">📚 Tümü</option>
-        <option value="favorites">⭐ Favoriler</option>
-        <option value="general">🩺 Genel Tıp</option>
-        <option value="anatomy">🦴 Anatomi</option>
-        <option value="diseases">🦠 Hastalıklar</option>
-        <option value="verbs">💉 Tıbbi Fiiller</option>
-        
+        <button
+            id="dropdownButton"
+            class="dropdown-button"
+            onclick="toggleDropdown()">
 
-    </select>
+            📚 Tümü ▼
+
+        </button>
+
+        <div id="dropdownMenu" class="dropdown-menu">
+
+            <div onclick="selectCategory('all','📚 Tümü')">
+                📚 Tümü
+            </div>
+
+            <div onclick="selectCategory('favorites','⭐ Favoriler')">
+                ⭐ Favoriler
+            </div>
+
+            <div onclick="selectCategory('general','🩺 Genel Tıp')">
+                🩺 Genel Tıp
+            </div>
+
+            <div onclick="selectCategory('anatomy','🦴 Anatomi')">
+                🦴 Anatomi
+            </div>
+
+            <div onclick="selectCategory('diseases','🦠 Hastalıklar')">
+                🦠 Hastalıklar
+            </div>
+
+            <div onclick="selectCategory('verbs','💉 Tıbbi Fiiller')">
+                💉 Tıbbi Fiiller
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
-    <option value="all">Tümü</option>
-    <option value="verbs">Tıbbi Fiiller</option>
-    <option value="anatomy">Anatomi</option>
-    <option value="diseases">Hastalıklar</option>
-    <option value="general">Genel Tıp</option>
-</select>
-<div class="card">
+  
+   <div class="card">
 
-<h2 id="english">Diagnose</h2>
+    <h2 id="english">Diagnose</h2>
 
-<p><b id="translationTitle">Türkçesi:</b></p>
-<p id="turkish">Teşhis koymak</p>
+    <p>
+        <b id="translationTitle">Türkçesi:</b>
+    </p>
 
-<p><b>Örnek:</b></p>
-<p id="example">The doctor diagnosed pneumonia.</p>
+    <p id="turkish">Teşhis koymak</p>
+
+    <p>
+        <b>Örnek:</b>
+    </p>
+
+    <p id="example">
+        The doctor diagnosed pneumonia.
+    </p>
 
 </div>
 
@@ -77,6 +109,6 @@
 <script src="words.js"></script>
 <script src="script.js"></script>
 
-
+<div id="toast"></div>
 </body>
 </html>
