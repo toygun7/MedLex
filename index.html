@@ -16,9 +16,23 @@
     placeholder="Kelime ara..."
     onkeyup="searchWord()"
 >
-<label for="category">Kategori:</label>
+<div class="category-box">
 
-<select id="category" onchange="filterCategory()">
+    <label for="category">📂 Kategori</label>
+
+    <select id="category" onchange="filterCategory()">
+
+        <option value="all">📚 Tümü</option>
+        <option value="favorites">⭐ Favoriler</option>
+        <option value="general">🩺 Genel Tıp</option>
+        <option value="anatomy">🦴 Anatomi</option>
+        <option value="diseases">🦠 Hastalıklar</option>
+        <option value="verbs">💉 Tıbbi Fiiller</option>
+        
+
+    </select>
+
+</div>
     <option value="all">Tümü</option>
     <option value="verbs">Tıbbi Fiiller</option>
     <option value="anatomy">Anatomi</option>
@@ -29,7 +43,7 @@
 
 <h2 id="english">Diagnose</h2>
 
-<p><b>Türkçesi:</b></p>
+<p><b id="translationTitle">Türkçesi:</b></p>
 <p id="turkish">Teşhis koymak</p>
 
 <p><b>Örnek:</b></p>
@@ -47,7 +61,9 @@
 
     <button onclick="nextWord()">Sonraki ➜</button>
 
-    <button onclick="addFavorite()">⭐ Favorilere Ekle</button>
+    <button id="favoriteButton" onclick="addFavorite()">
+    ⭐ Favorilere Ekle
+</button>
 
     <h3>⭐ Favori Sayısı: <span id="favoriteCount">0</span></h3>
 

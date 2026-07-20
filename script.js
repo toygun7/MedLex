@@ -36,10 +36,14 @@ function flipCard(){
         document.getElementById("english").innerText = currentWord.english;
         document.getElementById("turkish").innerText = currentWord.turkish;
 
+        document.getElementById("translationTitle").innerText = "Türkçesi:";
+
     }else{
 
         document.getElementById("english").innerText = currentWord.turkish;
         document.getElementById("turkish").innerText = currentWord.english;
+
+        document.getElementById("translationTitle").innerText = "İngilizcesi:";
 
     }
 
@@ -83,6 +87,7 @@ function showCurrentWord(){
 
     const currentWord = filteredWords[current];
 
+    document.getElementById("translationTitle").innerText = "Türkçesi:";
     document.getElementById("english").innerText = currentWord.english;
     document.getElementById("turkish").innerText = currentWord.turkish;
     document.getElementById("example").innerText = currentWord.example;
@@ -137,6 +142,10 @@ function filterCategory(){
 
         filteredWords = [...words];
 
+    }else if(category === "favorites"){
+
+        filteredWords = [...favorites];
+
     }else{
 
         filteredWords = words.filter(function(word){
@@ -151,20 +160,10 @@ function filterCategory(){
 
     showCurrentWord();
 
-    document.getElementById("wordCount").innerText = filteredWords.length;
-
 }
-
-document.getElementById("favoriteCount").innerText = favorites.length;
-
-document.getElementById("wordCount").innerText = words.length;
-
-
-showCurrentWord();
-
 function updateFavoriteButton(){
 
-    const button = document.querySelector("button[onclick='addFavorite()']");
+    const button = document.getElementById("favoriteButton");
 
     const word = filteredWords[current];
 
@@ -176,12 +175,24 @@ function updateFavoriteButton(){
 
     if(exists){
 
-        button.innerText = "❌ Favoriden Çıkar";
+        button.innerText = "❤️ Favoriden Çıkar";
+
+        button.classList.remove("favorite-inactive");
+        button.classList.add("favorite-active");
 
     }else{
 
         button.innerText = "⭐ Favorilere Ekle";
 
+        button.classList.remove("favorite-active");
+        button.classList.add("favorite-inactive");
+
     }
 
 }
+document.getElementById("favoriteCount").innerText = favorites.length;
+
+document.getElementById("wordCount").innerText = words.length;
+
+
+showCurrentWord();
