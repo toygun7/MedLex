@@ -1,9 +1,16 @@
+// =====================
+// MedLex Main Script
+// =====================
+
+// ---------- Variables ----------
 
 let current = 0;
 let filteredWords = [...words];
 let flipped = false;
 let selectedCategory = "all";
+let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
+// ---------- Navigation ----------
 function nextWord() {
 
     current = (current + 1) % filteredWords.length;
@@ -28,29 +35,9 @@ function randomWord(){
 }
 
 
-function flipCard(){
 
-    const currentWord = filteredWords[current];
+// ---------- Search ----------
 
-    if(flipped){
-
-        document.getElementById("english").innerText = currentWord.english;
-        document.getElementById("turkish").innerText = currentWord.turkish;
-
-        document.getElementById("translationTitle").innerText = "Türkçesi:";
-
-    }else{
-
-        document.getElementById("english").innerText = currentWord.turkish;
-        document.getElementById("turkish").innerText = currentWord.english;
-
-        document.getElementById("translationTitle").innerText = "İngilizcesi:";
-
-    }
-
-    flipped = !flipped;
-
-}
 function searchWord(){
 
     const text = document.getElementById("search").value.toLowerCase();
@@ -73,6 +60,9 @@ function searchWord(){
     }
 
 }
+
+// ---------- Card ----------
+
 function showCurrentWord(){
 
     flipped = false;
@@ -96,7 +86,32 @@ function showCurrentWord(){
     updateFavoriteButton();
 
 }
-let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+function flipCard(){
+
+    const currentWord = filteredWords[current];
+
+    if(flipped){
+
+        document.getElementById("english").innerText = currentWord.english;
+        document.getElementById("turkish").innerText = currentWord.turkish;
+
+        document.getElementById("translationTitle").innerText = "Türkçesi:";
+
+    }else{
+
+        document.getElementById("english").innerText = currentWord.turkish;
+        document.getElementById("turkish").innerText = currentWord.english;
+
+        document.getElementById("translationTitle").innerText = "İngilizcesi:";
+
+    }
+
+    flipped = !flipped;
+
+}
+
+// ---------- Favorites ----------
 
 function addFavorite(){
 
@@ -191,6 +206,9 @@ function updateFavoriteButton(){
     }
 
 }
+
+// ---------- Toast ----------
+
 function showToast(message,type="info"){
 
     const toast = document.getElementById("toast");
@@ -210,6 +228,9 @@ function showToast(message,type="info"){
     },2000);
 
 }
+
+// ---------- Dropdown ----------
+
 function toggleDropdown(){
 
     document
@@ -217,6 +238,7 @@ function toggleDropdown(){
         .classList.toggle("show");
 
 }
+
 function selectCategory(value,text){
 
     selectedCategory = value;
@@ -231,9 +253,9 @@ function selectCategory(value,text){
     filterCategory();
 
 }
-window.onclick = function(event){
+window.addEventListener("click", function(event){
 
-    if(!event.target.closest(".dropdown")){
+    if (!event.target.closest(".dropdown")) {
 
         document
             .getElementById("dropdownMenu")
@@ -241,10 +263,12 @@ window.onclick = function(event){
 
     }
 
-}
+});
+
+// ---------- Startup ----------
+
 document.getElementById("favoriteCount").innerText = favorites.length;
 
 document.getElementById("wordCount").innerText = words.length;
-
 
 showCurrentWord();

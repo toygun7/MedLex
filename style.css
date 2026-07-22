@@ -685,3 +685,38 @@ button:active{
     }
 
 }
+/* HEADER */
+
+.header{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:30px;
+
+}
+
+.logo{
+
+    width:70px;
+
+    height:70px;
+
+    object-fit:contain;
+
+}
+
+.subtitle{
+
+    margin-top:-10px;
+
+    color:#666;
+
+    font-size:17px;
+
+}

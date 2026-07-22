@@ -3,16 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedLex</title>
-
+    <title>MedLex | Medical English</title>
+    <link rel="icon" type="image/png" href="medlexlogo.png">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h1>🩺 MedLex</h1>
+<header class="header">
+
+    <img src="medlexlogo.png" alt="MedLex Logo" class="logo">
+
+    <div>
+
+        <h1>MedLex</h1>
+
+        <p class="subtitle">
+            Medical English Flashcards
+        </p>
+
+    </div>
+
+</header>
+
+<main>
+
 <input
     type="text"
     id="search"
+    autocomplete="off"
     placeholder="Kelime ara..."
     onkeyup="searchWord()"
 >
@@ -83,7 +102,7 @@
 
 </div>
 
-<div>
+<div class="button-group">
 
     <button onclick="previousWord()">⬅ Önceki</button>
 
@@ -94,21 +113,31 @@
     <button onclick="nextWord()">Sonraki ➜</button>
 
     <button id="favoriteButton" onclick="addFavorite()">
-    ⭐ Favorilere Ekle
-</button>
+        ⭐ Favorilere Ekle
+    </button>
+
+</div>
+
+<div class="info-box">
 
     <h3>⭐ Favori Sayısı: <span id="favoriteCount">0</span></h3>
 
     <h3>📚 Toplam Kelime: <span id="wordCount">0</span></h3>
 
 </div>
+
+</main>
+
+<div id="toast"></div>
+
 <script src="anatomy.js"></script>
 <script src="diseases.js"></script>
 <script src="verbs.js"></script>
 <script src="general.js"></script>
 <script src="words.js"></script>
+<script src="utils.js"></script>
 <script src="script.js"></script>
 
-<div id="toast"></div>
+
 </body>
 </html>

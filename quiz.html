@@ -4,14 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>🧠 MedLex Quiz</title>
+
+    <link rel="icon" type="image/png" href="medlexlogo.png">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>🧠 MedLex Quiz</h1>
+    <header class="header">
+
+    <img src="medlexlogo.png" alt="MedLex Logo" class="logo">
+
+    <div>
+
+        <h1>MedLex Quiz</h1>
+
+        <p class="subtitle">Test Your Medical English</p>
+
+    </div>
+
+</header>
+
+    <main>
 
     <div class="category-box">
 
@@ -38,15 +55,19 @@
 
     <div class="button-group">
 
-        <button onclick="startQuiz()">▶ Quiz Başlat</button>
+        <button onclick="newQuiz()">▶ Quiz Başlat</button>
 
         <button onclick="changeMode()">🔄 Mod Değiştir</button>
+
+        <button onclick="location.href='index.html'">🏠 Ana Sayfa</button>
 
     </div>
 
     <div class="card">
 
-        <h2 id="question">Soru burada</h2>
+        <h2 id="question">Quiz başlatmak için butona basın</h2>
+
+        <p id="quizStatus"></p>
 
         <button id="option1" onclick="checkAnswer(this)">Seçenek 1</button>
 
@@ -58,13 +79,19 @@
 
         <h3 id="score">🏆 Puan: 0</h3>
 
+        <div id="quizResult"></div>
+
     </div>
+    
+    </main>
+     <div id="toast"></div>
 
     <script src="anatomy.js"></script>
     <script src="diseases.js"></script>
     <script src="verbs.js"></script>
     <script src="general.js"></script>
     <script src="words.js"></script>
+    <script src="utils.js"></script>
     <script src="quiz.js"></script>
 
 </body>
