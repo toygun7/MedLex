@@ -1,31 +1,48 @@
 // =====================
 // MedLex Quiz Script
+// Version 2.0
 // =====================
+
 
 // ---------- Variables ----------
 
 let mode = "tr-en";
 
-let quizWord = null;
 let score = 0;
-let quizWords = [];
 
 let currentQuestion = 0;
+
 let correctAnswers = 0;
+
 let wrongAnswers = 0;
+
+let quizWords = [];
+
 let quizPool = [];
 
-// ---------- Elements ----------
+let quizWord = null;
+
+
+// ---------- DOM Elements ----------
 
 const question = document.getElementById("question");
+
 const scoreText = document.getElementById("score");
+
 const categoryCount = document.getElementById("categoryCount");
 
+const quizCategory = document.getElementById("quizCategory");
+
 const optionButtons = [
+
     document.getElementById("option1"),
+
     document.getElementById("option2"),
+
     document.getElementById("option3"),
+
     document.getElementById("option4")
+
 ];
 
 // ---------- New Quiz ----------
@@ -33,13 +50,16 @@ const optionButtons = [
 function newQuiz() {
 
     score = 0;
-    correctAnswers = 0;
-    wrongAnswers = 0;
+
     currentQuestion = 0;
+
+    correctAnswers = 0;
+
+    wrongAnswers = 0;
 
     scoreText.innerText = "🏆 Puan: 0";
 
-    const category = document.getElementById("quizCategory").value;
+    const category = quizCategory.value;
 
     if (category === "all") {
 
@@ -47,17 +67,22 @@ function newQuiz() {
 
     } else if (category === "favorites") {
 
-        quizWords = JSON.parse(localStorage.getItem("favorites")) || [];
+        quizWords =
+            JSON.parse(localStorage.getItem("favorites")) || [];
 
     } else {
 
-        quizWords = words.filter(word => word.category === category);
+        quizWords = words.filter(function(word) {
+
+            return word.category === category;
+
+        });
 
     }
 
     quizPool = [...quizWords];
 
-    optionButtons.forEach(button => {
+    optionButtons.forEach(function(button) {
 
         button.style.display = "block";
 
@@ -67,23 +92,9 @@ function newQuiz() {
 
 }
 
-// ---------- Quiz ----------
+// ---------- Start Quiz ----------
 
 function startQuiz() {
-
-    if (quizWords.length === 0) {
-
-        question.innerText = "⭐ Bu kategoride kelime yok.";
-
-        optionButtons.forEach(function(button) {
-
-            button.style.display = "none";
-
-        });
-
-        return;
-
-    }
 
     if (quizPool.length === 0) {
 
@@ -93,29 +104,43 @@ function startQuiz() {
 
     }
 
-    currentQuestion++;
-
     const randomIndex = Math.floor(Math.random() * quizPool.length);
 
     quizWord = quizPool[randomIndex];
 
     quizPool.splice(randomIndex, 1);
 
+    currentQuestion++;
+
     if (mode === "tr-en") {
 
         question.innerText =
-            "Soru " + currentQuestion + " / " + quizWords.length +
+            "Soru " +
+            currentQuestion +
+            " / " +
+            quizWords.length +
             "\n\n" +
             quizWord.turkish;
 
     } else {
 
         question.innerText =
-            "Soru " + currentQuestion + " / " + quizWords.length +
+            "Soru " +
+            currentQuestion +
+            " / " +
+            quizWords.length +
             "\n\n" +
             quizWord.english;
 
     }
+
+    createOptions();
+
+}
+
+// ---------- Options ----------
+
+function createOptions() {
 
     let options = [];
 
@@ -135,11 +160,13 @@ function startQuiz() {
 
         if (mode === "tr-en") {
 
-            randomOption = words[Math.floor(Math.random() * words.length)].english;
+            randomOption =
+                words[Math.floor(Math.random() * words.length)].english;
 
         } else {
 
-            randomOption = words[Math.floor(Math.random() * words.length)].turkish;
+            randomOption =
+                words[Math.floor(Math.random() * words.length)].turkish;
 
         }
 
@@ -151,17 +178,21 @@ function startQuiz() {
 
     }
 
-    options.sort(() => Math.random() - 0.5);
+    options.sort(function () {
 
-    optionButtons.forEach(function(button, index) {
+        return Math.random() - 0.5;
 
-        button.style.display = "block";
+    });
+
+    optionButtons.forEach(function (button, index) {
+
         button.innerText = options[index];
 
     });
 
 }
-// ---------- Answer ----------
+
+// ---------- Check Answer ----------
 
 function checkAnswer(button) {
 
@@ -172,6 +203,7 @@ function checkAnswer(button) {
     if (isCorrect) {
 
         score++;
+
         correctAnswers++;
 
         showToast("🎉 Doğru!", "success");
@@ -192,75 +224,88 @@ function checkAnswer(button) {
 
     }
 
-    scoreText.innerText = "🏆 Puan: " + score;
+    scoreText.innerText =
+        "🏆 Puan: " + score;
 
-    setTimeout(function () {
-
-        startQuiz();
-
-    }, 700);
+    startQuiz();
 
 }
-
 
 // ---------- Result ----------
 
 function showResult() {
 
+    saveStatistics();
+
     const percentage = Math.round(
         (correctAnswers / quizWords.length) * 100
     );
 
+    let message = "";
+
+    if (percentage === 100) {
+
+        message = "🏆 Mükemmel!";
+
+    } else if (percentage >= 80) {
+
+        message = "🎉 Çok iyi!";
+
+    } else if (percentage >= 60) {
+
+        message = "👍 Güzel!";
+
+    } else if (percentage >= 40) {
+
+        message = "📚 Biraz daha çalış!";
+
+    } else {
+
+        message = "💪 Vazgeçme!";
+
+    }
+
     question.innerHTML = `
-        <div style="line-height:1.8">
-            <h2>🎉 Quiz Tamamlandı</h2>
-
-            <p>🏆 Puan: <b>${score}</b></p>
-
-            <p>✅ Doğru: <b>${correctAnswers}</b></p>
-
-            <p>❌ Yanlış: <b>${wrongAnswers}</b></p>
-
-            <p>📈 Başarı: <b>%${percentage}</b></p>
-
-            <br>
-
-            <button onclick="newQuiz()">
-                🔄 Tekrar Oyna
-            </button>
-
-        </div>
+        ${message}<br><br>
+        🏆 Puan: ${score}<br>
+        ✅ Doğru: ${correctAnswers}<br>
+        ❌ Yanlış: ${wrongAnswers}<br>
+        📈 Başarı: %${percentage}
     `;
 
-    optionButtons.forEach(function(button){
+    optionButtons.forEach(function(button) {
 
         button.style.display = "none";
 
     });
 
 }
+
 // ---------- Mode ----------
 
 function changeMode() {
 
-    mode = (mode === "tr-en") ? "en-tr" : "tr-en";
+    if (mode === "tr-en") {
 
-    if (quizWords.length > 0) {
+        mode = "en-tr";
 
-        startQuiz();
+    } else {
+
+        mode = "tr-en";
 
     }
 
-}
+    newQuiz();
 
+}
 
 // ---------- Category ----------
 
 function showCategoryCount() {
 
-    const category = document.getElementById("quizCategory").value;
+    const category = quizCategory.value;
 
-    let count;
+    let count = 0;
 
     if (category === "all") {
 
@@ -268,22 +313,81 @@ function showCategoryCount() {
 
     } else if (category === "favorites") {
 
-        count = (JSON.parse(localStorage.getItem("favorites")) || []).length;
+        count = JSON.parse(
+            localStorage.getItem("favorites")
+        )?.length || 0;
 
     } else {
 
-        count = words.filter(word => word.category === category).length;
+        count = words.filter(function(word) {
+
+            return word.category === category;
+
+        }).length;
 
     }
 
     categoryCount.innerText =
-        "📚 Bu kategoride " + count + " kelime var.";
+        "Bu kategoride " + count + " kelime var.";
 
 }
 
+// ---------- Statistics ----------
+
+function saveStatistics() {
+
+    const statistics = {
+
+        totalQuestions:
+            Number(localStorage.getItem("totalQuestions")) || 0,
+
+        totalCorrect:
+            Number(localStorage.getItem("totalCorrect")) || 0,
+
+        totalWrong:
+            Number(localStorage.getItem("totalWrong")) || 0,
+
+        totalScore:
+            Number(localStorage.getItem("totalScore")) || 0
+
+    };
+
+    statistics.totalQuestions += quizWords.length;
+
+    statistics.totalCorrect += correctAnswers;
+
+    statistics.totalWrong += wrongAnswers;
+
+    statistics.totalScore += score;
+
+    localStorage.setItem(
+        "totalQuestions",
+        statistics.totalQuestions
+    );
+
+    localStorage.setItem(
+        "totalCorrect",
+        statistics.totalCorrect
+    );
+
+    localStorage.setItem(
+        "totalWrong",
+        statistics.totalWrong
+    );
+
+    localStorage.setItem(
+        "totalScore",
+        statistics.totalScore
+    );
+
+}
 
 // ---------- Startup ----------
 
-showCategoryCount();
+optionButtons.forEach(function(button) {
 
-question.innerText = "▶ Quiz başlatmak için butona basın.";
+    button.style.display = "none";
+
+});
+
+showCategoryCount();

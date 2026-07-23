@@ -12,17 +12,37 @@
 
 <header class="header">
 
-    <img src="medlexlogo.png" alt="MedLex Logo" class="logo">
+    <div class="header-left">
 
-    <div>
+        <img src="medlexlogo.png" alt="MedLex Logo" class="logo">
 
-        <h1>MedLex</h1>
+        <div>
 
-        <p class="subtitle">
-            Medical English Flashcards
-        </p>
+            <h1>MedLex</h1>
+
+            <p class="subtitle">
+                Medical English Flashcards
+            </p>
+
+        </div>
 
     </div>
+
+    <nav class="navbar">
+
+        <a href="index.html" class="active">
+            📚 Flashcards
+        </a>
+
+        <a href="quiz.html">
+            🧠 Quiz
+        </a>
+
+        <a href="statistics.html">
+    📊 Statistics
+     </a>
+
+    </nav>
 
 </header>
 
@@ -35,9 +55,10 @@
     placeholder="Kelime ara..."
     onkeyup="searchWord()"
 >
+
 <div class="category-box">
 
-    <label>📂 Kategori</label>
+    <label for="dropdownButton">📂 Kategori</label>
 
     <div class="dropdown">
 
@@ -82,7 +103,7 @@
 
 </div>
   
-   <div class="card">
+<div class="card">
 
     <h2 id="english">Diagnose</h2>
 
@@ -93,26 +114,23 @@
     <p id="turkish">Teşhis koymak</p>
 
     <p>
-        <b>Örnek:</b>
-    </p>
-
-    <p id="example">
-        The doctor diagnosed pneumonia.
-    </p>
+    <strong>Örnek:</strong>
+    <span id="example"></span>
+</p>
 
 </div>
 
 <div class="button-group">
 
-    <button onclick="previousWord()">⬅ Önceki</button>
+    <button type="button" onclick="previousWord()">⬅ Önceki</button>
 
-    <button onclick="flipCard()">🔄 Çevir</button>
+    <button type="button" onclick="flipCard()">🔄 Çevir</button>
 
-    <button onclick="randomWord()">🎲 Rastgele</button>
+    <button type="button"onclick="randomWord()">🎲 Rastgele</button>
 
-    <button onclick="nextWord()">Sonraki ➜</button>
+    <button type="button"onclick="nextWord()">Sonraki ➜</button>
 
-    <button id="favoriteButton" onclick="addFavorite()">
+    <button id="favoriteButton" type="button" onclick="addFavorite()">
         ⭐ Favorilere Ekle
     </button>
 

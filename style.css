@@ -24,6 +24,8 @@ body{
 
     padding:40px 20px;
 
+    min-height:100vh;
+
 }
 
 
@@ -43,16 +45,6 @@ h1{
 
 }
 
-
-/* ---------- CONTAINER ---------- */
-
-.container{
-
-    max-width:900px;
-
-    margin:auto;
-
-}
 /* ---------- SEARCH ---------- */
 
 input{
@@ -174,6 +166,8 @@ input:focus{
 
     transition:all .30s ease;
 
+    animation:fadeCard .4s ease;
+
 }
 
 .card:hover{
@@ -229,7 +223,10 @@ button{
 
     cursor:pointer;
 
-    transition:all .25s ease;
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
 
     box-shadow:0 5px 15px rgba(0,0,0,.18);
 
@@ -250,17 +247,7 @@ button:active{
     transform:scale(.97);
 
 }
-.card button{
 
-    width:90%;
-
-    display:block;
-
-    margin:12px auto;
-
-    font-size:17px;
-
-}
 .button-group{
 
     display:flex;
@@ -269,7 +256,7 @@ button:active{
 
     flex-wrap:wrap;
 
-    gap:10px;
+    gap:14px;
 
     margin:25px 0;
 
@@ -428,6 +415,10 @@ button:active{
 
     width:92%;
 
+    display:block;
+
+    margin:12px auto;
+
     min-height:58px;
 
     border-radius:14px;
@@ -441,11 +432,6 @@ button:active{
 .card button:hover{
 
     transform:scale(1.02);
-
-}
-.card{
-
-    animation:fadeCard .4s ease;
 
 }
 
@@ -532,6 +518,20 @@ button:active{
 
     }
 
+    .header{
+
+        flex-direction:column;
+
+    }
+
+    .navbar{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+    }
+
 }
 /* ==========================================
    SCROLLBAR
@@ -612,6 +612,10 @@ button:active{
 
     box-shadow:0 10px 22px rgba(0,0,0,.18);
 
+    background:white;
+
+    color:#333;
+
 }
 
 .dropdown-menu{
@@ -691,13 +695,17 @@ button:active{
 
     display:flex;
 
-    justify-content:center;
+    justify-content:space-between;
 
     align-items:center;
 
     gap:18px;
 
     margin-bottom:30px;
+
+    padding-bottom:20px;
+
+    border-bottom:1px solid #dce6f5;
 
 }
 
@@ -708,6 +716,14 @@ button:active{
     height:70px;
 
     object-fit:contain;
+
+    transition:.25s;
+
+}
+
+.logo:hover{
+
+    transform:rotate(-5deg) scale(1.05);
 
 }
 
@@ -720,3 +736,64 @@ button:active{
     font-size:17px;
 
 }
+/* ===================== */
+/* Header & Navigation   */
+/* ===================== */
+
+.header-left{
+
+    display:flex;
+    align-items:center;
+    gap:18px;
+
+}
+
+.navbar{
+
+    display:flex;
+    gap:12px;
+
+}
+
+.navbar a{
+
+    text-decoration:none;
+
+    color:#5b6472;
+
+    padding:10px 18px;
+
+    border-radius:12px;
+
+    transition:.25s;
+
+    font-weight:600;
+
+}
+
+.navbar a:hover{
+
+    background:#eef2ff;
+
+    color:#4f46e5;
+
+    transform:translateY(-2px);
+
+}
+
+.navbar .active{
+
+    background:#4f46e5;
+
+    color:white;
+
+    box-shadow:0 4px 12px rgba(79,70,229,.35);
+
+}
+
+.navbar .active:hover{
+
+    transform:translateY(-2px);
+
+}
+
